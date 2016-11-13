@@ -1,0 +1,49 @@
+<script>
+var Cats = function(name, photo){
+  
+  this.name = name;
+  this.photo = photo;
+  this.thumbs = 0;
+  
+  this.count = function(){
+     this.thumbs += 1; 
+  };
+};
+
+document.addEventListener('DOMContentLoaded', function(){
+    var arr = [
+        new Cats('jeż', 'https://s-media-cache-ak0.pinimg.com/originals/82/2f/c2/822fc271f3457af71e88d80b51346769.jpg'),
+        new Cats('burek', 'https://s-media-cache-ak0.pinimg.com/originals/82/2f/c2/822fc271f3457af71e88d80b51346769.jpg')
+        
+        ];
+    for (var i= 0; i < arr.length; i++){
+        
+        var h3 = document.createElement('H3');
+        h3.textContent = arr[i].name;
+        var names = document.createElement('img');
+        names.setAttribute('src', arr[i].photo );
+        names.setAttribute('height', '100px' );
+        names.setAttribute('width', '100px' );
+        var counts = document.createElement('p');
+        counts.textContent = arr[i].thumbs;
+        var num = i;
+        
+         names.addEventListener('click', (function(numCopy){
+             
+            return function(){
+                arr[numCopy].count();
+                document.getElementsByTagName('p')[numCopy].innerHTML = arr[numCopy].thumbs;
+                
+            };
+         })(num));
+        
+        document.body.appendChild(h3);
+        document.body.appendChild(names);
+        document.body.appendChild(counts);
+    
+    }
+});
+    
+</script>
+
+
