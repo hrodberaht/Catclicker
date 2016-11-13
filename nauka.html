@@ -6,42 +6,72 @@ var Cats = function(name, photo){
   this.thumbs = 0;
   
   this.count = function(){
-     this.thumbs += 1; 
+     this.thumbs++; 
   };
 };
+
+
 
 document.addEventListener('DOMContentLoaded', function(){
     var arr = [
         new Cats('jeż', 'https://s-media-cache-ak0.pinimg.com/originals/82/2f/c2/822fc271f3457af71e88d80b51346769.jpg'),
-        new Cats('burek', 'https://s-media-cache-ak0.pinimg.com/originals/82/2f/c2/822fc271f3457af71e88d80b51346769.jpg')
+        new Cats('burek', 'https://www.vetprofessionals.com/catprofessional/images/home-cat.jpg'),
+        new Cats('antek', 'http://www.kotydomowe.com/img/koty/mainecoon/kot_maine_coon.jpg')
         
         ];
     for (var i= 0; i < arr.length; i++){
         
         var h3 = document.createElement('H3');
         h3.textContent = arr[i].name;
-        var names = document.createElement('img');
-        names.setAttribute('src', arr[i].photo );
-        names.setAttribute('height', '100px' );
-        names.setAttribute('width', '100px' );
+        var h4 = document.createElement('H4');
+        var img = document.createElement('img');
+        img.setAttribute('height', '100px' );
+        img.setAttribute('width', '100px' );
         var counts = document.createElement('p');
-        counts.textContent = arr[i].thumbs;
+        //counts.textContent = 0;
         var num = i;
+        var actualObject;
         
-         names.addEventListener('click', (function(numCopy){
+         
+        h3.addEventListener('click', (function(numCopy){
              
             return function(){
-                arr[numCopy].count();
-                document.getElementsByTagName('p')[numCopy].innerHTML = arr[numCopy].thumbs;
                 
+                document.getElementsByTagName('div')[0].innerHTML = "";
+                img.setAttribute('src', arr[numCopy].photo );
+                counts.textContent = arr[numCopy].thumbs;
+                h4.textContent = arr[numCopy].name;
+                div.appendChild(h4);
+                div.appendChild(img);
+                div.appendChild(counts);
+                
+                actualObject = numCopy;
+                
+                
+                //console.log(numCopy);
+                
+            
+             
+              
             };
-         })(num));
+        })(num));
+        
+        img.addEventListener('click', function(){
+                //console.log(actualObject);
+                arr[actualObject].count();
+                console.log( arr[actualObject].thumbs);
+                document.getElementsByTagName('p')[0].innerHTML = arr[actualObject].thumbs;
+                
+        });
         
         document.body.appendChild(h3);
-        document.body.appendChild(names);
-        document.body.appendChild(counts);
-    
+        
+        
+       
     }
+    var div = document.createElement('div');
+    div.textContent = "";
+    document.body.appendChild(div);
 });
     
 </script>
